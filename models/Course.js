@@ -3,10 +3,9 @@ const { Schema, model } = require("mongoose");
 const courseSchema = new Schema({
     courseName: { type: String, required: true },
     lecturer: { type: String, required: true },
-    creditPoints: { type: Number, required: true },
+    creditPoints: { type: Number, required: true, min: 3, max: 5 },
     maxStudents: { type: Number, required: true },
-    registeredStudents: [{ type: String, ref: "Student" }], 
-    numOfStudents: { type: Number, default: 0 },
+    registeredStudents: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 }, { collection: "courses" });
 
 
