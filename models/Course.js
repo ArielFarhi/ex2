@@ -5,7 +5,7 @@ const courseSchema = new Schema({
     lecturer: { type: String, required: true },
     creditPoints: { type: Number, required: true, min: 3, max: 5 },
     maxStudents: { type: Number, required: true },
-    registeredStudents: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    registeredStudents: [{ type: Schema.Types.ObjectId, ref: "User" }],
 }, { collection: "courses" });
 
 

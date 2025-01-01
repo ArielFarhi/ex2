@@ -14,7 +14,7 @@ const userSchema = new Schema(
     username: { type: String, required: true, unique: true }, 
     password: { type: String, required: true }, 
     yearOfStudy: { type: Number, min: 1, max: 4 }, 
-    registeredCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }], 
+    registeredCourses: [{ type: Schema.Types.ObjectId, ref: "Course" }], 
     creditPoints: { type: Number, default: 0 }, 
   },
   { collection: "users" }
