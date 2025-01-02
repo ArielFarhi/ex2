@@ -1,6 +1,7 @@
 require('dotenv').config();
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 async function register(req, res) {
     const { idNumber, fullName, address, role, username, password, yearOfStudy } = req.body;
@@ -72,9 +73,28 @@ async function login(req, res) {
     }
 }
 
+
+async function verifyToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ message: 'Access denied: No token provided' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
+        req.user = decoded; 
+        next();
+    } catch (error) {
+        res.status(403).json({ message: 'Invalid or expired token' });
+    }
+}
+
 module.exports = { 
     register,
     login,
+    verifyToken,
 }
 
 
