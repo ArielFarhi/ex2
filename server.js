@@ -6,6 +6,7 @@ const port = process.env.PORT || 8080;
 
 const { authRouter } = require("./routers/authRouter");
 const { usersRouter } = require("./routers/usersRouter");
+const { coursesRouter } = require("./routers/coursesRouter");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -13,6 +14,7 @@ app.use(logger("dev"));
 
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/courses', coursesRouter);
 
 app.use((req, res) => {
     res.status(400).send("Page wasn't found");
